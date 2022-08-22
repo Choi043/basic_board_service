@@ -9,7 +9,12 @@
         <label class="form-label">내용</label>
         <textarea class="form-control" rows="3" name="content"></textarea>
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" onclick="location.href='/articles' " class="btn btn-primary">Submit</button>
+    <!--
+    <a href="/articles">Back</a>
+    -->
+    <button type="button" onclick="location.href='/articles' " class="btn btn-primary">Back</button>
+
 </form>
 
 {{>layouts/footer}}
