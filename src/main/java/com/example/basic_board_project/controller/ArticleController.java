@@ -62,12 +62,27 @@ public class ArticleController {
         return "articles/index";
     }
 
-    @GetMapping("articles/{id}/edit")
+    @GetMapping("/articles/{id}/edit")
     public String edit(@PathVariable Long id, Model model) {
         Article articleEntity = articleRepository.findById(id).orElse(null);
 
         model.addAttribute("article", articleEntity);
 
         return "articles/edit";
+    }
+
+    @PostMapping("/articles/update")
+    public String update(ArticleForm form) {
+
+        // DTO를 Entity로 변환 -> Entity를 DB에 저장
+        Article articleEntity = form.toEntity();
+
+        Article target = articleRepository.findById(articleEntity.getId()).orElse(null);
+
+        if(target != null) {
+            articleRepository.save(articleEntity);
+        }
+
+        return "redirect:/articles/" + articleEntity.getId();
     }
 }
