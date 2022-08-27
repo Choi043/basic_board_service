@@ -44,7 +44,7 @@ public class ArticleApiController {
         Article target = articleRepository.findById(id).orElse(null);
 
         // 잘못된 요청 처리
-        if(target == null || id != article.getId()) {
+        if (target == null || id != article.getId()) {
             // 400
             log.info("잘못된 요청! id: {}, article: {}", id, article.toString());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
@@ -54,5 +54,18 @@ public class ArticleApiController {
         target.patch(article);      // 기존 article에 붙여줌, 즉 body에 누락되면 기존 값으로 대체
         Article updated = articleRepository.save(target);
         return ResponseEntity.status(HttpStatus.OK).body(updated);
+    }
+
+    // Delete
+    @DeleteMapping("/api/articles/{id}")
+    public ResponseEntity<Article> delete(@PathVariable Long id) {
+        Article target = articleRepository.findById(id).orElse(null);
+
+        if (target == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }
+        articleRepository.delete(target);
+
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 }
