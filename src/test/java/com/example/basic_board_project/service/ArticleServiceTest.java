@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -60,6 +61,7 @@ class ArticleServiceTest {
     }
 
     @Test
+    @Transactional
     void create_S___only_title_and_content() {
         // 예상
         String title = "라라라라";
@@ -75,7 +77,8 @@ class ArticleServiceTest {
     }
 
     @Test
-    void create_F___if_write_id_to_dto() {
+    @Transactional
+    void create_F___if_dto_contains_id() {
         // 예상
         Long id = 4L;
         String title = "라라라라";
