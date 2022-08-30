@@ -31,4 +31,30 @@ class ArticleServiceTest {
         // 비교
         assertEquals(expected.toString(), articles.toString());
     }
+
+    @Test
+    void show_S() {
+        // 예상
+        Long id = 1L;
+        Article expected = new Article(id, "가가가가", "1111");
+
+        // 실제
+        Article article = articleService.show(id);
+
+        // 비교
+        assertEquals(expected.toString(), article.toString());
+    }
+
+    @Test
+    void show_F___not_exist_ID() {
+        // 예상
+        Long id = -1L;
+        Article expected = null;
+
+        // 실제
+        Article article = articleService.show(id);
+
+        // 비교
+        assertEquals(expected, article);
+    }
 }
